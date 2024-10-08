@@ -58,3 +58,6 @@
 
 **(DELETE) Отсутствует**  
 Удаление записей могут производить только администраторы.
+
+## База данных
+![image](https://github.com/user-attachments/assets/7bb8c841-c98b-42cd-bbca-3744a3d28cc9)
