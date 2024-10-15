@@ -12,10 +12,8 @@ public static class SerilogConfigurator
                 .Enrich.WithCorrelationId()
                 .ReadFrom.Configuration(context.Configuration);
         });
-
         builder.Services.AddHttpContextAccessor();
     }
-
     public static void ConfigureApplication(IApplicationBuilder app)
     {
         app.UseSerilogRequestLogging();

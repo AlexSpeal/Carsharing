@@ -1,0 +1,6 @@
+﻿services:
+  carsharingweb:
+    image: carsharingweb
+    build:
+      context: .
+      dockerfile: CarsharingWeb/Dockerfile
