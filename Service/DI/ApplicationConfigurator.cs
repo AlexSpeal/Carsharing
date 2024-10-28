@@ -8,11 +8,13 @@ public static class ApplicationConfigurator
     {
         SerilogConfigurator.ConfigureService(builder);
         SwaggerConfigurator.ConfigureService(builder.Services);
+        DbContextConfigurator.ConfigureServices(builder);
     }
 
     public static void ConfigureApplication(WebApplication app)
     {
         SerilogConfigurator.ConfigureApplication(app);
         SwaggerConfigurator.ConfigureApplication(app);
+        DbContextConfigurator.ConfigureApplication(app);
     }
 }

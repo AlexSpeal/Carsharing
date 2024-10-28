@@ -4,3 +4,9 @@
     build:
       context: .
       dockerfile: Service/Dockerfile
+
+  dataaccess:
+    image: dataaccess
+    build:
+      context: .
+      dockerfile: DataAccess/Dockerfile
