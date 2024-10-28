@@ -60,4 +60,4 @@
 Удаление записей могут производить только администраторы.
 
 ## База данных
-![image](https://github.com/user-attachments/assets/7e658328-7082-4b61-a611-094850ca061e)
+![image](https://github.com/user-attachments/assets/21c586f8-e365-401b-8a9a-6437e4d210b8)
