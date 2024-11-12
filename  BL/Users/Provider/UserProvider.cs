@@ -25,7 +25,6 @@ public class UserProvider : IUserProvider
         var patronymic = filter?.Patronymic;
         var email = filter?.Email;
         var roleId = filter?.RoleId;
-        var driverLicenseId = filter?.DriverLicenseId;
         var stateId = filter?.StateId;
         var modificationTime = filter?.ModificationTime;
         var creationTime=filter?.CreationTime;
@@ -34,7 +33,6 @@ public class UserProvider : IUserProvider
             (login == null || u.Login == login)
             && (lastName == null || u.LastName == lastName)
             && (roleId == null || u.RoleId == roleId)
-            && (driverLicenseId == null || u.DriverLicenseId == driverLicenseId)
             && (stateId == null || u.StateId == stateId)
             && (email == null || u.Email == email)
             && (firstName == null || u.FirstName == firstName)

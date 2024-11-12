@@ -36,8 +36,8 @@ public class CarsharingDbContext : DbContext
         modelBuilder.Entity<UserEntity>().HasOne(x => x.State)
             .WithMany(x => x.Users).HasForeignKey(x => x.StateId);
 
-        modelBuilder.Entity<UserEntity>().HasOne(x => x.DriverLicense)
-            .WithOne(x => x.User).HasForeignKey<DriverLicenseEntity>(x => x.UserId);
+        modelBuilder.Entity<DriverLicenseEntity>().HasOne(x=>x.User)
+            .WithMany(x=>x.DriverLicenses).HasForeignKey(x=>x.UserId);
 
         modelBuilder.Entity<RentEntity>().HasOne(x => x.User)
             .WithMany(x => x.Rents).HasForeignKey(x => x.UserId);
@@ -47,10 +47,6 @@ public class CarsharingDbContext : DbContext
 
         modelBuilder.Entity<RentEntity>().HasOne(x => x.Car)
             .WithMany(x => x.Rents).HasForeignKey(x => x.CarId);
-
-        modelBuilder.Entity<DriverLicenseEntity>()
-            .HasIndex(dl => dl.UserId)
-            .IsUnique();
 
         modelBuilder.Entity<TechnicalInspectionEntity>().HasOne(x => x.Car)
             .WithMany(x => x.TechnicalInspections).HasForeignKey(x => x.CarId);

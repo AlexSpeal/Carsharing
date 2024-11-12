@@ -41,10 +41,5 @@ public class RegisterUserRequestValidator : AbstractValidator<RegisterUserReques
             .GreaterThan(0)
             .WithMessage("role id is required");
         
-        RuleFor(x => x.DriverLicenseId)
-            .NotEmpty()
-            .GreaterThan(0)
-            .WithMessage("driver license id id is required");
-        
     }
 }

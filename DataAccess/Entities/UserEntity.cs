@@ -14,9 +14,8 @@ public class UserEntity : BaseEntity
 
     public int RoleId { get; set; }
     public virtual RoleEntity Role { get; set; }
-
-    public int DriverLicenseId { get; set; }
-    public virtual DriverLicenseEntity? DriverLicense { get; set; }
+    
+    public virtual ICollection<DriverLicenseEntity> DriverLicenses { get; set; }
 
     public int StateId { get; set; }
     public virtual StateEntity State { get; set; }

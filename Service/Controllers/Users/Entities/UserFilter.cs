@@ -11,6 +11,5 @@ public class UserFilter
     public DateTime ModificationTime { get; set; }
     public DateTime CreationTime { get; set; }
     public int? RoleId { get; set; }
-    public int? DriverLicenseId { get; set; }
     public int? StateId { get; set; }
 }

@@ -101,8 +101,7 @@ namespace DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId")
-                        .IsUnique();
+                    b.HasIndex("UserId");
 
                     b.ToTable("DriverLicense");
                 });
@@ -263,9 +262,6 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("DriverLicenseId")
-                        .HasColumnType("integer");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("text");
@@ -325,8 +321,8 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("DataAccess.Entities.DriverLicenseEntity", b =>
                 {
                     b.HasOne("DataAccess.Entities.UserEntity", "User")
-                        .WithOne("DriverLicense")
-                        .HasForeignKey("DataAccess.Entities.DriverLicenseEntity", "UserId")
+                        .WithMany("DriverLicenses")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -431,7 +427,7 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("DataAccess.Entities.UserEntity", b =>
                 {
-                    b.Navigation("DriverLicense");
+                    b.Navigation("DriverLicenses");
 
                     b.Navigation("Rents");
 
