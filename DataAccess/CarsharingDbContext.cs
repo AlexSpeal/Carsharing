@@ -26,7 +26,7 @@ public class CarsharingDbContext : DbContext
         modelBuilder.Entity<RoleEntity>().HasKey(x => x.Id);
         modelBuilder.Entity<StateEntity>().HasKey(x => x.Id);
         modelBuilder.Entity<UserEntity>().HasKey(x => x.Id);
-
+        
         modelBuilder.Entity<CarEntity>().HasOne(x => x.State)
             .WithMany(x => x.Cars).HasForeignKey(x => x.StateId);
 
@@ -56,5 +56,7 @@ public class CarsharingDbContext : DbContext
 
         modelBuilder.Entity<TechnicalInspectionEntity>().HasOne(x => x.State)
             .WithMany(x => x.TechnicalInspections).HasForeignKey(x => x.MaintenanceStateId);
+        
+        modelBuilder.Entity<UserEntity>().HasIndex(x=>x.Login).IsUnique();
     }
 }

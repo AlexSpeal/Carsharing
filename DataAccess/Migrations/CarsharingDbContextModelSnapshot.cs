@@ -300,6 +300,9 @@ namespace DataAccess.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Login")
+                        .IsUnique();
+
                     b.HasIndex("RoleId");
 
                     b.HasIndex("StateId");

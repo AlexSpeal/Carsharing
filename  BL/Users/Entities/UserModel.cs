@@ -16,6 +16,5 @@ public class UserModel
     public string PasswordHash { get; set; }
     
     public int RoleId { get; set; }
-    public int DriverLicenseId { get; set; }
     public int StateId { get; set; }
 }
