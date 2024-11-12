@@ -6,9 +6,9 @@ namespace DataAccess.Repository;
 
 public class Repository<T> : IRepository<T> where T : BaseEntity
 {
-    private readonly IDbContextFactory<DbContext> _contextFactory;
+    private readonly IDbContextFactory<CarsharingDbContext> _contextFactory;
 
-    public Repository(IDbContextFactory<DbContext> contextFactory)
+    public Repository(IDbContextFactory<CarsharingDbContext> contextFactory)
     {
         _contextFactory = contextFactory;
     }

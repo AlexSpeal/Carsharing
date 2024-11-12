@@ -1,18 +1,15 @@
 ﻿using DataAccess;
 using Microsoft.EntityFrameworkCore;
+using Service.Settings;
 
 namespace Service.loC;
 
 public class DbContextConfigurator
 {
-    public static void ConfigureServices(WebApplicationBuilder builder)
+    public static void ConfigureServices(IServiceCollection services, CarsharingSettings settings)
     {
-        var configuration = new ConfigurationBuilder()
-            .AddJsonFile("appsettings.json", false)
-            .Build();
-        var connectionString = configuration.GetValue<string>("CarsharingContext");
-
-        builder.Services.AddDbContextFactory<CarsharingDbContext>(
+        var connectionString = settings.ConnectionString;
+        services.AddDbContextFactory<CarsharingDbContext>(
             options => { options.UseNpgsql(connectionString); },
             ServiceLifetime.Scoped);
     }
