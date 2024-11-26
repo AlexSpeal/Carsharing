@@ -4,10 +4,12 @@ public static class CarsharingSettingsReader
 {
     public static CarsharingSettings Read(IConfiguration configuration)
     {
-        return new CarsharingSettings()
+        return new CarsharingSettings
         {
-            ServiceUri = configuration.GetValue<Uri>("Uri"),
-            ConnectionString = configuration.GetValue<string>("CarsharingContext")
+            ConnectionString = configuration.GetValue<string>("CarsharingContext"),
+            ClientId = configuration.GetValue<string>("IdentityServerSettings:ClientId"),
+            ClientSecret = configuration.GetValue<string>("IdentityServerSettings:ClientSecret"),
+            IdentityServerUri = configuration.GetValue<string>("IdentityServerSettings:Uri")
         };
     }
 }

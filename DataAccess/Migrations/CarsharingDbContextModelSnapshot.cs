@@ -152,32 +152,6 @@ namespace DataAccess.Migrations
                     b.ToTable("Rent");
                 });
 
-            modelBuilder.Entity("DataAccess.Entities.RoleEntity", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
-
-                    b.Property<DateTime>("CreationTime")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<Guid>("ExternalId")
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime>("ModificationTime")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Role");
-                });
-
             modelBuilder.Entity("DataAccess.Entities.StateEntity", b =>
                 {
                     b.Property<long>("Id")
@@ -259,6 +233,12 @@ namespace DataAccess.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .HasColumnType("text");
+
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("timestamp with time zone");
 
@@ -266,16 +246,21 @@ namespace DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("boolean");
+
                     b.Property<Guid>("ExternalId")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("FirstName")
+                    b.Property<string>("FullName")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Login")
                         .IsRequired()
@@ -284,30 +269,186 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("ModificationTime")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<string>("NormalizedEmail")
+                        .HasColumnType("text");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasColumnType("text");
+
                     b.Property<string>("PasswordHash")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Patronymic")
-                        .IsRequired()
+                    b.Property<string>("PhoneNumber")
                         .HasColumnType("text");
 
-                    b.Property<long>("RoleId")
-                        .HasColumnType("bigint");
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("text");
 
                     b.Property<long>("StateId")
                         .HasColumnType("bigint");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
                     b.HasIndex("Login")
                         .IsUnique();
 
-                    b.HasIndex("RoleId");
-
                     b.HasIndex("StateId");
 
-                    b.ToTable("User");
+                    b.ToTable("Users", (string)null);
+
+                    b.UseTptMappingStrategy();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<int>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<string>("NormalizedName")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("user_roles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("text");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("user_roles_claims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("text");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("user_claims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
+                {
+                    b.Property<string>("LoginProvider")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ProviderKey")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
+                    b.ToTable("user_logins", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
+                {
+                    b.Property<int>("RoleId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
+                    b.ToTable("user_role_owners", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
+                {
+                    b.Property<string>("LoginProvider")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("text");
+
+                    b.ToTable("user_tokens", (string)null);
+                });
+
+            modelBuilder.Entity("DataAccess.Entities.AdminEntity", b =>
+                {
+                    b.HasBaseType("DataAccess.Entities.UserEntity");
+
+                    b.ToTable("Admins", (string)null);
+                });
+
+            modelBuilder.Entity("DataAccess.Entities.CustomerEntity", b =>
+                {
+                    b.HasBaseType("DataAccess.Entities.UserEntity");
+
+                    b.HasIndex("ExternalId")
+                        .IsUnique();
+
+                    b.ToTable("Customers", (string)null);
+                });
+
+            modelBuilder.Entity("DataAccess.Entities.EmployeeEntity", b =>
+                {
+                    b.HasBaseType("DataAccess.Entities.UserEntity");
+
+                    b.HasIndex("ExternalId")
+                        .IsUnique();
+
+                    b.ToTable("Employees", (string)null);
                 });
 
             modelBuilder.Entity("DataAccess.Entities.CarEntity", b =>
@@ -323,13 +464,13 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("DataAccess.Entities.DriverLicenseEntity", b =>
                 {
-                    b.HasOne("DataAccess.Entities.UserEntity", "User")
+                    b.HasOne("DataAccess.Entities.CustomerEntity", "Customer")
                         .WithMany("DriverLicenses")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("User");
+                    b.Navigation("Customer");
                 });
 
             modelBuilder.Entity("DataAccess.Entities.RentEntity", b =>
@@ -346,7 +487,7 @@ namespace DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DataAccess.Entities.UserEntity", "User")
+                    b.HasOne("DataAccess.Entities.CustomerEntity", "Customer")
                         .WithMany("Rents")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -354,9 +495,9 @@ namespace DataAccess.Migrations
 
                     b.Navigation("Car");
 
-                    b.Navigation("State");
+                    b.Navigation("Customer");
 
-                    b.Navigation("User");
+                    b.Navigation("State");
                 });
 
             modelBuilder.Entity("DataAccess.Entities.TechnicalInspectionEntity", b =>
@@ -373,7 +514,7 @@ namespace DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DataAccess.Entities.UserEntity", "TechnicalEmployee")
+                    b.HasOne("DataAccess.Entities.EmployeeEntity", "TechnicalEmployee")
                         .WithMany("TechnicalInspections")
                         .HasForeignKey("TechnicianId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -388,21 +529,40 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("DataAccess.Entities.UserEntity", b =>
                 {
-                    b.HasOne("DataAccess.Entities.RoleEntity", "Role")
-                        .WithMany("Users")
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("DataAccess.Entities.StateEntity", "State")
                         .WithMany("Users")
                         .HasForeignKey("StateId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Role");
-
                     b.Navigation("State");
+                });
+
+            modelBuilder.Entity("DataAccess.Entities.AdminEntity", b =>
+                {
+                    b.HasOne("DataAccess.Entities.UserEntity", null)
+                        .WithOne()
+                        .HasForeignKey("DataAccess.Entities.AdminEntity", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("DataAccess.Entities.CustomerEntity", b =>
+                {
+                    b.HasOne("DataAccess.Entities.UserEntity", null)
+                        .WithOne()
+                        .HasForeignKey("DataAccess.Entities.CustomerEntity", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("DataAccess.Entities.EmployeeEntity", b =>
+                {
+                    b.HasOne("DataAccess.Entities.UserEntity", null)
+                        .WithOne()
+                        .HasForeignKey("DataAccess.Entities.EmployeeEntity", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("DataAccess.Entities.CarEntity", b =>
@@ -410,11 +570,6 @@ namespace DataAccess.Migrations
                     b.Navigation("Rents");
 
                     b.Navigation("TechnicalInspections");
-                });
-
-            modelBuilder.Entity("DataAccess.Entities.RoleEntity", b =>
-                {
-                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("DataAccess.Entities.StateEntity", b =>
@@ -428,12 +583,15 @@ namespace DataAccess.Migrations
                     b.Navigation("Users");
                 });
 
-            modelBuilder.Entity("DataAccess.Entities.UserEntity", b =>
+            modelBuilder.Entity("DataAccess.Entities.CustomerEntity", b =>
                 {
                     b.Navigation("DriverLicenses");
 
                     b.Navigation("Rents");
+                });
 
+            modelBuilder.Entity("DataAccess.Entities.EmployeeEntity", b =>
+                {
                     b.Navigation("TechnicalInspections");
                 });
 #pragma warning restore 612, 618

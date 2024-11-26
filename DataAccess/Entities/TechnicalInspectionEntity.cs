@@ -13,7 +13,7 @@ public class TechnicalInspectionEntity : BaseEntity
     public virtual StateEntity State { get; set; }
 
     public long TechnicianId { get; set; }
-    public virtual UserEntity TechnicalEmployee { get; set; }
+    public virtual EmployeeEntity TechnicalEmployee { get; set; }
 
     public long CarId { get; set; }
     public virtual CarEntity Car { get; set; }

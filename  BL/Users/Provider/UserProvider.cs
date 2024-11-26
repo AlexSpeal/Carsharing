@@ -20,23 +20,17 @@ public class UserProvider : IUserProvider
     {
         var login = filter?.Login;
 
-        var lastName = filter?.LastName;
-        var firstName = filter?.FirstName;
-        var patronymic = filter?.Patronymic;
+        var fullName = filter?.FullName;
         var email = filter?.Email;
-        var roleId = filter?.RoleId;
         var stateId = filter?.StateId;
         var modificationTime = filter?.ModificationTime;
         var creationTime=filter?.CreationTime;
 
         var users = _usersRepository.GetAll(u =>
             (login == null || u.Login == login)
-            && (lastName == null || u.LastName == lastName)
-            && (roleId == null || u.RoleId == roleId)
+            && (fullName == null || u.FullName == fullName)
             && (stateId == null || u.StateId == stateId)
             && (email == null || u.Email == email)
-            && (firstName == null || u.FirstName == firstName)
-            && (patronymic == null || u.Patronymic == patronymic)
             && (creationTime == null || u.CreationTime == creationTime)
             && (modificationTime == null || u.ModificationTime == modificationTime));
         

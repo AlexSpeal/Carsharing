@@ -6,10 +6,10 @@ namespace Service.loC;
 
 public class DbContextConfigurator
 {
-    public static void ConfigureServices(IServiceCollection services, CarsharingSettings settings)
+    public static void ConfigureServices(WebApplicationBuilder builder, CarsharingSettings settings)
     {
         var connectionString = settings.ConnectionString;
-        services.AddDbContextFactory<CarsharingDbContext>(
+        builder.Services.AddDbContextFactory<CarsharingDbContext>(
             options => { options.UseNpgsql(connectionString); },
             ServiceLifetime.Scoped);
     }

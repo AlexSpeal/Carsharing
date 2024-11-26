@@ -1,26 +1,25 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Identity;
 
 namespace DataAccess.Entities;
 
 [Table("User")]
-public class UserEntity : BaseEntity
+public class UserEntity : IdentityUser<int>, IBaseEntity
 {
+    public long Id { get; set; }
+    public Guid ExternalId { get; set; }
+    public DateTime ModificationTime { get; set; }
+    public DateTime CreationTime { get; set; }
     public string Login { get; set; }
-    public string LastName { get; set; }
-    public string FirstName { get; set; }
-    public string Patronymic { get; set; }
+    
+    public string FullName { get; set; }
     public string Email { get; set; }
     public string PasswordHash { get; set; }
 
-    public long RoleId { get; set; }
-    public virtual RoleEntity Role { get; set; }
-    
-    public virtual ICollection<DriverLicenseEntity> DriverLicenses { get; set; }
-
     public long StateId { get; set; }
     public virtual StateEntity State { get; set; }
-
-    public virtual ICollection<TechnicalInspectionEntity>? TechnicalInspections { get; set; }
-
-    public virtual ICollection<RentEntity>? Rents { get; set; }
+    
+}
+public class UserRole : IdentityRole<int>
+{
 }

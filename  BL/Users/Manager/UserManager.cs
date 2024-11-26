@@ -55,14 +55,11 @@ public class UserManager:IUserManager
                 dest.ExternalId = entity.ExternalId;
                 dest.CreationTime = entity.CreationTime;
                 dest.ModificationTime=DateTime.UtcNow;
-                dest.RoleId = model.RoleId;
                 dest.StateId=model.StateId;
                 dest.Login = src.Login ?? entity.Login;
                 dest.PasswordHash = src.PasswordHash ?? entity.PasswordHash;
                 dest.Email = src.Email ?? entity.Email;
-                dest.LastName = src.LastName ?? entity.LastName;
-                dest.FirstName = src.FirstName ?? entity.FirstName;
-                dest.Patronymic = src.Patronymic ?? entity.Patronymic;
+                dest.FullName = src.FullName ?? entity.FullName;
             }
         ));
         

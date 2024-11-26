@@ -3,9 +3,7 @@
 public class FilterUserModel
 {
     public string? Login { get; set; }
-    public string? LastName { get; set; }
-    public string? FirstName { get; set; }
-    public string? Patronymic { get; set; }
+    public string? FullName { get; set; }
     public string? Email { get; set; }
     
     public DateTime ModificationTime { get; set; }

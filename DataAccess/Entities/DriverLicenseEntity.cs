@@ -11,5 +11,5 @@ public class DriverLicenseEntity : BaseEntity
     public string Category { get; set; }
 
     public long UserId { get; set; }
-    public virtual  UserEntity User { get; set; }
+    public virtual  CustomerEntity Customer { get; set; }
 }

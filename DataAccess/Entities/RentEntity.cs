@@ -13,7 +13,7 @@ public class RentEntity : BaseEntity
     public virtual CarEntity Car { get; set; }
 
     public long UserId { get; set; }
-    public virtual UserEntity User { get; set; }
+    public virtual CustomerEntity Customer { get; set; }
 
     public long StateId { get; set; }
     public virtual StateEntity State { get; set; }
