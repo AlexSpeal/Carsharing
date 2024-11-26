@@ -43,7 +43,7 @@ public class UserProvider : IUserProvider
         return _mapper.Map<IEnumerable<UserModel>>(users);
     }
 
-    public UserModel GerUserInfo(int id)
+    public UserModel GerUserInfo(long id)
     {
         try
         {

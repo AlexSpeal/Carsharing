@@ -19,8 +19,6 @@ public class UserBLProfile : Profile
             .ForMember(x => x.ModificationTime, y => y.Ignore());
 
         CreateMap<UpdateUserModel, UserEntity>()
-            .ForMember(x => x.Id, y => y.MapFrom(src => src.Id))
-            .ForMember(x => x.ExternalId, y => y.MapFrom(src => src.ExternalId))
             .ForMember(x => x.ModificationTime, y => y.Ignore());
     }
 }

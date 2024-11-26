@@ -12,12 +12,12 @@ public class UserEntity : BaseEntity
     public string Email { get; set; }
     public string PasswordHash { get; set; }
 
-    public int RoleId { get; set; }
+    public long RoleId { get; set; }
     public virtual RoleEntity Role { get; set; }
     
     public virtual ICollection<DriverLicenseEntity> DriverLicenses { get; set; }
 
-    public int StateId { get; set; }
+    public long StateId { get; set; }
     public virtual StateEntity State { get; set; }
 
     public virtual ICollection<TechnicalInspectionEntity>? TechnicalInspections { get; set; }

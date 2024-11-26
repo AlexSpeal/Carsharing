@@ -1,6 +1,6 @@
-﻿namespace BL.Users.Entities;
+﻿namespace Service.Controllers.Users.Entities;
 
-public class UpdateUserModel
+public class UpdateUserRequest
 {
     public string? Login { get; set; }
     public string? LastName { get; set; }
@@ -9,6 +9,6 @@ public class UpdateUserModel
     public string? Email { get; set; }
     public string? PasswordHash { get; set; }
     
-    public long RoleId { get; set; }
-    public long StateId { get; set; }
+    public int RoleId { get; set; }
+    public int StateId { get; set; }
 }

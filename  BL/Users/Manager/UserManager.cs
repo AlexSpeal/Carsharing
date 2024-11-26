@@ -24,7 +24,7 @@ public class UserManager:IUserManager
         return _mapper.Map<UserModel>(entity);
     }
 
-    public void DeleteUser(int id)
+    public void DeleteUser(long id)
     {
         try
         {
@@ -37,10 +37,39 @@ public class UserManager:IUserManager
         }
     }
 
-    public UserModel UpdateUser(UpdateUserModel updateModel)
+    public UserModel UpdateUser(UpdateUserModel model, long userId)
     {
-        var entity = _mapper.Map<UserEntity>(updateModel);
-        entity = _usersRepository.Save(entity);
-        return _mapper.Map<UserModel>(entity);
+     
+        var entity = _usersRepository.GetById(userId);
+        if (entity == null)
+        {
+            throw new UserNotFoundException("User not found");
+        }
+        
+        entity = _mapper.Map<UpdateUserModel, UserEntity>(model, opts => 
+            opts.AfterMap(
+            (src, dest) =>
+            {
+                
+                dest.Id = userId;
+                dest.ExternalId = entity.ExternalId;
+                dest.CreationTime = entity.CreationTime;
+                dest.ModificationTime=DateTime.UtcNow;
+                dest.RoleId = model.RoleId;
+                dest.StateId=model.StateId;
+                dest.Login = src.Login ?? entity.Login;
+                dest.PasswordHash = src.PasswordHash ?? entity.PasswordHash;
+                dest.Email = src.Email ?? entity.Email;
+                dest.LastName = src.LastName ?? entity.LastName;
+                dest.FirstName = src.FirstName ?? entity.FirstName;
+                dest.Patronymic = src.Patronymic ?? entity.Patronymic;
+            }
+        ));
+        
+        _usersRepository.Save(entity);
+        
+        return  _mapper.Map<UserModel>(entity);
     }
+
+
 }

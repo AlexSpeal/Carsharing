@@ -24,11 +24,11 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("DataAccess.Entities.CarEntity", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("bigint");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<string>("Brand")
                         .IsRequired()
@@ -51,8 +51,8 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("ModificationTime")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("StateId")
-                        .HasColumnType("integer");
+                    b.Property<long>("StateId")
+                        .HasColumnType("bigint");
 
                     b.Property<int>("YearOfManufacture")
                         .HasColumnType("integer");
@@ -66,11 +66,11 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("DataAccess.Entities.DriverLicenseEntity", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("bigint");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<string>("Category")
                         .IsRequired()
@@ -96,8 +96,8 @@ namespace DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer");
+                    b.Property<long>("UserId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
@@ -108,14 +108,14 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("DataAccess.Entities.RentEntity", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("bigint");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<int>("CarId")
-                        .HasColumnType("integer");
+                    b.Property<long>("CarId")
+                        .HasColumnType("bigint");
 
                     b.Property<decimal>("Cost")
                         .HasColumnType("numeric");
@@ -135,11 +135,11 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("StateId")
-                        .HasColumnType("integer");
+                    b.Property<long>("StateId")
+                        .HasColumnType("bigint");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer");
+                    b.Property<long>("UserId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
@@ -154,11 +154,11 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("DataAccess.Entities.RoleEntity", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("bigint");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("timestamp with time zone");
@@ -180,11 +180,11 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("DataAccess.Entities.StateEntity", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("bigint");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("timestamp with time zone");
@@ -206,14 +206,14 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("DataAccess.Entities.TechnicalInspectionEntity", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("bigint");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<int>("CarId")
-                        .HasColumnType("integer");
+                    b.Property<long>("CarId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("timestamp with time zone");
@@ -231,14 +231,14 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("InspectionStart")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("MaintenanceStateId")
-                        .HasColumnType("integer");
+                    b.Property<long>("MaintenanceStateId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("ModificationTime")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("TechnicianId")
-                        .HasColumnType("integer");
+                    b.Property<long>("TechnicianId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
@@ -253,11 +253,11 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("DataAccess.Entities.UserEntity", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("bigint");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("timestamp with time zone");
@@ -292,11 +292,11 @@ namespace DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("RoleId")
-                        .HasColumnType("integer");
+                    b.Property<long>("RoleId")
+                        .HasColumnType("bigint");
 
-                    b.Property<int>("StateId")
-                        .HasColumnType("integer");
+                    b.Property<long>("StateId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 

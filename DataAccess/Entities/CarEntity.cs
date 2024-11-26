@@ -10,7 +10,7 @@ public class CarEntity : BaseEntity
     public int YearOfManufacture { get; set; }
     public string LicensePlate { get; set; }
 
-    public int StateId { get; set; }
+    public long StateId { get; set; }
     public virtual StateEntity State { get; set; }
 
     public virtual ICollection<RentEntity>? Rents { get; set; }

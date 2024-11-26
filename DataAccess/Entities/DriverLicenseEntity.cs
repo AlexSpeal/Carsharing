@@ -10,6 +10,6 @@ public class DriverLicenseEntity : BaseEntity
     public DateTime ExpirationDate { get; set; }
     public string Category { get; set; }
 
-    public int UserId { get; set; }
+    public long UserId { get; set; }
     public virtual  UserEntity User { get; set; }
 }

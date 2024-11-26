@@ -2,7 +2,7 @@
 
 public class UserModel
 {
-    public int Id { get; set; }
+    public long Id { get; set; }
 
     public Guid ExternalId { get; set; }
     public DateTime ModificationTime { get; set; }
@@ -15,6 +15,6 @@ public class UserModel
     public string Email { get; set; }
     public string PasswordHash { get; set; }
     
-    public int RoleId { get; set; }
-    public int StateId { get; set; }
+    public long RoleId { get; set; }
+    public long StateId { get; set; }
 }

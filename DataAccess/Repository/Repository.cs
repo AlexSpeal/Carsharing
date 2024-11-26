@@ -25,7 +25,7 @@ public class Repository<T> : IRepository<T> where T : BaseEntity
         return context.Set<T>().Where(predicate);
     }
 
-    public T? GetById(int id)
+    public T? GetById(long id)
     {
         using var context = _contextFactory.CreateDbContext();
         return context.Set<T>().FirstOrDefault(x => x.Id == id);

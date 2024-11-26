@@ -5,6 +5,6 @@ namespace BL.Users.Manager;
 public interface IUserManager
 {
     UserModel CreateUser(CreateUserModel createModel);
-    void DeleteUser(int id);
-    UserModel UpdateUser(UpdateUserModel updateModel);
+    void DeleteUser(long id);
+    UserModel UpdateUser(UpdateUserModel updateModel, long id);
 }
