@@ -6,6 +6,6 @@ namespace BL.Authorization;
 
 public interface IAuthProvider
 {
-     Task<UserModel> RegisterUser(string fullName, string email, string password);
+     Task<UserModel> RegisterUser(string fullName,string login, string email, string password);
     Task<TokensResponse> AuthorizeUser(string email, string password);
 }

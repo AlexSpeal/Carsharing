@@ -23,11 +23,11 @@ public class AuthController(IAuthProvider authProvider) : ControllerBase
   
     [HttpPost]
     [Route("register")]
-    public async Task<IActionResult> RegisterUser(string fullName,string email, string password)
+    public async Task<IActionResult> RegisterUser(string fullName,string login,string email, string password)
     {
         try
         {
-            var user = await authProvider.RegisterUser(fullName,email, password);
+            var user = await authProvider.RegisterUser(fullName,login,email, password);
             return Ok(user);
         }
         catch (Exception ex)

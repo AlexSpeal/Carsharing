@@ -10,12 +10,7 @@ public class UserEntity : IdentityUser<int>, IBaseEntity
     public Guid ExternalId { get; set; }
     public DateTime ModificationTime { get; set; }
     public DateTime CreationTime { get; set; }
-    public string Login { get; set; }
-    
     public string FullName { get; set; }
-    public string Email { get; set; }
-    public string PasswordHash { get; set; }
-
     public long StateId { get; set; }
     public virtual StateEntity State { get; set; }
     

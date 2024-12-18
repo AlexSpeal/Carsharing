@@ -56,7 +56,7 @@ public class UserManager:IUserManager
                 dest.CreationTime = entity.CreationTime;
                 dest.ModificationTime=DateTime.UtcNow;
                 dest.StateId=model.StateId;
-                dest.Login = src.Login ?? entity.Login;
+                dest.UserName = src.Login ?? entity.UserName;
                 dest.PasswordHash = src.PasswordHash ?? entity.PasswordHash;
                 dest.Email = src.Email ?? entity.Email;
                 dest.FullName = src.FullName ?? entity.FullName;

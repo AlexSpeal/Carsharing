@@ -16,7 +16,8 @@ public class UserBLProfile : Profile
             .ForMember(x => x.Id, y => y.Ignore())
             .ForMember(x => x.ExternalId, y => y.Ignore())
             .ForMember(x => x.CreationTime, y => y.Ignore())
-            .ForMember(x => x.ModificationTime, y => y.Ignore());
+            .ForMember(x => x.ModificationTime, y => y.Ignore())
+            .ForMember(x => x.PasswordHash, y => y.MapFrom(src=>src.Password));
 
         CreateMap<UpdateUserModel, UserEntity>()
             .ForMember(x => x.ModificationTime, y => y.Ignore());

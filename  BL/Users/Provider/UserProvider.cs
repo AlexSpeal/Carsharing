@@ -18,7 +18,7 @@ public class UserProvider : IUserProvider
     }
     public IEnumerable<UserModel> GetUsers(FilterUserModel filter = null)
     {
-        var login = filter?.Login;
+        var userName = filter?.Login;
 
         var fullName = filter?.FullName;
         var email = filter?.Email;
@@ -27,14 +27,14 @@ public class UserProvider : IUserProvider
         var creationTime=filter?.CreationTime;
 
         var users = _usersRepository.GetAll(u =>
-            (login == null || u.Login == login)
+            (userName == null || u.UserName == userName)
             && (fullName == null || u.FullName == fullName)
             && (stateId == null || u.StateId == stateId)
             && (email == null || u.Email == email)
             && (creationTime == null || u.CreationTime == creationTime)
             && (modificationTime == null || u.ModificationTime == modificationTime));
         
-        return _mapper.Map<IEnumerable<UserModel>>(users);
+        return  _mapper.Map<IEnumerable<UserModel>>(users);
     }
 
     public UserModel GerUserInfo(long id)

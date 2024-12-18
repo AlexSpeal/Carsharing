@@ -5,20 +5,20 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Logging;
 using Microsoft.IdentityModel.Tokens;
+using Serilog;
 using Service.Settings;
 
 public class AuthorizationConfigurator
 {
-    public static void ConfigureServices(IServiceCollection services, CarsharingSettings settings)
+     public static void ConfigureServices(IServiceCollection services, CarsharingSettings settings)
     {
         IdentityModelEventSource.ShowPII = true;
         services.AddIdentity<UserEntity, UserRole>(options =>
             {
                 options.Password.RequireDigit = true;
-                options.Password.RequireUppercase = true;
             })
             .AddEntityFrameworkStores<CarsharingDbContext>()
-            .AddSignInManager()
+            .AddSignInManager<SignInManager<UserEntity>>()
             .AddDefaultTokenProviders();
 
         services.AddIdentityServer()
@@ -26,30 +26,26 @@ public class AuthorizationConfigurator
             .AddInMemoryClients([
                 new Client
                 {
-                    ClientId = settings.ClientId!,
                     ClientName = settings.ClientId,
+                    ClientId = settings.ClientId,
                     Enabled = true,
                     AllowOfflineAccess = true,
-                    AllowedGrantTypes =
-                    [
+                    AllowedGrantTypes = [
                         GrantType.ClientCredentials,
-                        GrantType.ResourceOwnerPassword,
-                    ],
-                    ClientSecrets =
-                    [
-                        new Secret(settings.ClientSecret!.Sha256())
-                    ],
+                        GrantType.ResourceOwnerPassword],
+                    ClientSecrets = [new Secret(settings.ClientSecret.Sha256())],
                     AllowedScopes = ["api"]
                 }
             ])
             .AddAspNetIdentity<UserEntity>();
 
         services.AddAuthentication(options =>
-        {
-            options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-        }).AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
+            {
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            }
+        ).AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
         {
             options.RequireHttpsMetadata = false;
             options.Authority = settings.IdentityServerUri;
@@ -58,7 +54,7 @@ public class AuthorizationConfigurator
                 ValidateIssuerSigningKey = false,
                 ValidateIssuer = false,
                 ValidateAudience = false,
-                RequireSignedTokens = true,
+                RequireExpirationTime = true,
                 ValidateLifetime = true,
                 ClockSkew = TimeSpan.Zero
             };

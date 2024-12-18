@@ -43,10 +43,9 @@ public class AuthProvider(
         var tokenResponse = await client.RequestPasswordTokenAsync(new PasswordTokenRequest
         {
             Address = discoveryDoc.TokenEndpoint,
-            GrantType = GrantType.ResourceOwnerPassword,
             ClientId = clientId,
             ClientSecret = clientSecret,
-            UserName = user.UserName,
+            UserName = user.UserName!,
             Password = password,
             Scope = "api offline_access"
         });
@@ -63,7 +62,7 @@ public class AuthProvider(
         };
     }
     
-    public async Task<UserModel> RegisterUser(string fullName,string email, string password)
+    public async Task<UserModel> RegisterUser(string fullName,string login,string email, string password)
     {
         var existingUser = await userManager.FindByEmailAsync(email);
         if (existingUser != null)
@@ -74,16 +73,22 @@ public class AuthProvider(
         var user = new UserEntity
         {
             FullName = fullName,
+            UserName = login,
             Email = email,
-            UserName = email,
         };
+        user.ExternalId = Guid.NewGuid();
+        user.CreationTime = DateTime.UtcNow;
+        user.ModificationTime = DateTime.UtcNow;
+        //TODO добавлять начальное состояние другим образом
+        user.StateId = 1;
+        
         var result = await userManager.CreateAsync(user, password);
         if (!result.Succeeded)
         {
             throw new UserCreationException();
         }
-        
-        var createUserResult = await userManager.CreateAsync(user, password);
-        return mapper.Map<UserModel>(createUserResult);
+
+        var resultUser = await userManager.FindByEmailAsync(email);
+        return mapper.Map<UserModel>(resultUser);
     }
 }

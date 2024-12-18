@@ -34,7 +34,7 @@ public class CarsharingDbContext : DbContext
         modelBuilder.Entity<EmployeeEntity>().ToTable("Employees");
         modelBuilder.Entity<AdminEntity>().ToTable("Admins");
         
-        modelBuilder.Entity<UserEntity>().HasIndex(x => x.Login).IsUnique();
+        modelBuilder.Entity<UserEntity>().HasIndex(x => x.UserName).IsUnique();
         modelBuilder.Entity<EmployeeEntity>().HasIndex(x => x.ExternalId).IsUnique();
         modelBuilder.Entity<CustomerEntity>().HasIndex(x => x.ExternalId).IsUnique();
         

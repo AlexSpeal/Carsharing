@@ -11,7 +11,7 @@ public class RegisterUserRequestValidator : AbstractValidator<RegisterUserReques
             .NotEmpty()
             .Matches(@"[\w_]+")
             .WithMessage("Login is required");
-        RuleFor(x => x.PasswordHash)
+        RuleFor(x => x.Password)
             .NotEmpty()
             .WithMessage("Password is required");
         RuleFor(x => x.Email)
